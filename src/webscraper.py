@@ -3,7 +3,10 @@ from bs4 import BeautifulSoup
 
 def scrape_article(url):
     '''
+    Scrape a url for the paragraphs.
 
+    Parameters:
+    url (str): The target url.
     '''
     try:
         # Fetch the HTML content of the URL
@@ -18,7 +21,7 @@ def scrape_article(url):
         article_paragraphs = soup.find_all('p')  # Adjust this based on the specific website's structure
         for paragraph in article_paragraphs:
             paragraph_text = paragraph.get_text()
-            article_content += str(paragraph_text) + "\n\n"
+            article_content += str(paragraph_text) + " "
 
         # Return the extracted information as a dictionary
         return {
@@ -28,11 +31,11 @@ def scrape_article(url):
         return {'error': str(e)}
 
 # Example usage
-def webscrape():
+def webscraper():
     input_url = input("Enter the URL of the news article: ")
     scraped_data = scrape_article(input_url)
 
     if 'error' in scraped_data:
         print("Error:", scraped_data['error'])
     else:
-        print("Content:", scraped_data['content'])
+        return scraped_data['content']
